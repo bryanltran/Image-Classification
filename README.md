@@ -76,6 +76,8 @@ This benchmark demonstrates how prompt engineering influences CIFAR-10 classific
 
 ### Accuracy by Prompt Version
 
+The prompts can be seen as comments at the end of `cifar10_classify.py`
+
 | Prompt Version | Accuracy | Description |
 |----------------|----------|-------------|
 | Prompt 1 | 56% | Basic label instruction |

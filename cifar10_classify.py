@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 """
 CIFAR-10 classification using ai.sooners.us (OpenAI-compatible Chat Completions).
 
@@ -240,3 +240,62 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# =============================================================================
+# Prompt History (exact text and accuracy from experimentation)
+# =============================================================================
+
+# Prompt 1 — 56%
+# You are a vision model trained to classify CIFAR-10 images.
+# Task: Identify which object category the image belongs to.
+# Return only one of these labels, with no punctuation or extra text:
+# airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck
+
+# Prompt 2 — 56%
+# You are a vision model performing image classification.
+# Your task is to classify images from the CIFAR-10 dataset.
+# These images are low-resolution (32×32) and may contain noise and ambiguity.
+#
+# Return only one of these labels, with no punctuation or extra text:
+# 'airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'
+
+# Prompt 3 — 59%
+# You are a vision model performing supervised image classification on the CIFAR-10 dataset.
+# CIFAR-10 images are low-resolution (32×32), so you must rely on coarse shape, pose,
+# silhouette, background context, and general texture cues rather than fine detail.
+#
+# Your task is to classify each image into one of the following categories:
+#
+# airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck
+#
+# Distinguish confusing classes carefully:
+#
+# • bird vs frog: feathers and beak vs smooth body and large round eyes
+# • cat vs dog: short snout and triangular ears vs longer snout and rounded ears
+# • deer vs horse: slender wild body and thin legs vs larger body and thicker neck
+# • ship vs airplane vs truck: water vessel vs winged aircraft vs wheeled ground vehicle
+#
+# If uncertain, choose the most probable class based on global shape and environment.
+# Return only the class label, with no punctuation or extra text.
+
+# Prompt 4 — 63% (current best)
+# You are performing image classification on the CIFAR-10 dataset (32 by 32 low-resolution images).
+# Rely on global shape, silhouette, posture, and coarse texture cues.
+#
+# Classify the image into exactly one of the following classes:
+# airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck
+#
+# Key distinctions:
+#
+# - Frog: small round body, crouched posture, smooth skin, large forward-facing eyes.
+#   Frequently green or yellow hues, but color alone is insufficient. Confirm the shape first.
+# - Bird: feathers, beak, distinct head-body separation, wing shapes.
+# - Cat vs dog: short snout and triangular ears vs longer snout and rounded ears.
+# - Deer vs horse: slender wild body and thin legs vs larger body and thicker neck.
+# - Ship vs airplane vs truck: water vessel vs winged aircraft vs wheeled ground vehicle.
+#
+# If uncertain, choose the most probable class using shape and context.
+# Output only the final class label with no additional text.
+#
+# confusion matrices stored under matrices/confusion_matrix#.png
+# =============================================================================
